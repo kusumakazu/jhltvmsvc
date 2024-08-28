@@ -2,10 +2,14 @@ package id.co.kusumakazu.service.impl;
 
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
+import id.co.kusumakazu.domain.TargetTranslateContext;
 import id.co.kusumakazu.domain.response.speaker.SpeakersResponse;
 import id.co.kusumakazu.domain.response.speaker.SpeakersResponseItem;
+import id.co.kusumakazu.domain.response.translator.DeepLXTranslatorResponse;
+import id.co.kusumakazu.service.TranslatorService;
 import id.co.kusumakazu.service.VoiceVoxService;
 import id.co.kusumakazu.web.rest.RestClient;
+import java.util.Collections;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,6 +26,9 @@ public class VoiceVoxServiceImpl implements VoiceVoxService {
     @Autowired
     private RestClient restClient;
 
+    @Autowired
+    private TranslatorService translatorService;
+
     @Override
     public SpeakersResponse getSpeaker() throws Exception {
         log.info("get speaker");
@@ -36,7 +43,13 @@ public class VoiceVoxServiceImpl implements VoiceVoxService {
 
     public Mono<ResponseEntity<byte[]>> audioQueryAndSynthesize(String text, Integer speaker) throws Exception {
         log.info("Process Query Creation Audio Query");
-
-        return restClient.sendAudioQueryAndSynthesize(text, speaker);
+        DeepLXTranslatorResponse deepLXTranslatorResponse = translatorService.translate(
+            Collections.singletonList(text),
+            TargetTranslateContext.JA
+        );
+        return restClient.sendAudioQueryAndSynthesize(
+            deepLXTranslatorResponse.getTranslations().get(0).getText().replace("\n", ","),
+            speaker
+        );
     }
 }

@@ -1,9 +1,13 @@
 package id.co.kusumakazu.web.rest;
 
 import id.co.kusumakazu.config.ApplicationProperties;
+import id.co.kusumakazu.domain.TargetTranslateContext;
 import id.co.kusumakazu.domain.staticconstant.Utils;
-import id.co.kusumakazu.service.KatakanaConverterService;
+import id.co.kusumakazu.service.TranslatorService;
 import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,9 +27,6 @@ public class RestClient {
 
     @Autowired
     private ApplicationProperties applicationProperties;
-
-    @Autowired
-    private KatakanaConverterService katakanaConverterService;
 
     @Autowired
     private WebClient webClient;
@@ -68,7 +69,7 @@ public class RestClient {
     @Deprecated
     public ResponseEntity<String> sendQueryCreationAudioQuery(String text, Integer speaker) throws Exception {
         try {
-            log.info("sendQueryCreationAudioQuery ");
+            log.info("sendQueryCreationAudioQuery");
             String audioQueryUrl =
                 "http://" + applicationProperties.getVoiceVox().getHost() + ":" + applicationProperties.getVoiceVox().getPort();
 
@@ -77,7 +78,7 @@ public class RestClient {
 
             String audioQueryPayload = UriComponentsBuilder.fromHttpUrl(audioQueryUrl)
                 .path(Utils.URL_AUDIO_QUERY)
-                .queryParam("text", katakanaConverterService.convert(text))
+                .queryParam("text", text)
                 .queryParam("speaker", speaker)
                 .toUriString();
 
@@ -130,5 +131,36 @@ public class RestClient {
         headers.add("Content-Type", "audio/wav");
         headers.add("Content-Disposition", "attachment; filename=\"output.wav\"");
         return new ResponseEntity<>(wavContent, headers, HttpStatus.OK);
+    }
+
+    public ResponseEntity<String> sendTranslate(List<String> texts, TargetTranslateContext contextLang) throws Exception {
+        try {
+            log.info("send Translate to DeepLX");
+
+            String deepLXUrl =
+                "http://" +
+                applicationProperties.getDeepLX().getHost() +
+                ":" +
+                applicationProperties.getDeepLX().getPort() +
+                Utils.URL_DEEPLX_OFFICIAL;
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
+
+            Map<String, Object> body = new HashMap<>();
+            body.put("text", texts);
+            body.put("target_lang", contextLang.name());
+
+            HttpEntity<Map<String, Object>> requestEntity = new HttpEntity<>(body, headers);
+
+            ResponseEntity<String> response = getRestTemplate().exchange(deepLXUrl, HttpMethod.POST, requestEntity, String.class);
+            log.info("response : {}", response);
+            return response;
+        } catch (RestClientResponseException e) {
+            log.error("Error sendTranslate : {}", e.getMessage());
+            return ResponseEntity.status(e.getStatusCode()).body(e.getResponseBodyAsString());
+        } catch (Exception e) {
+            throw new Exception(e);
+        }
     }
 }
