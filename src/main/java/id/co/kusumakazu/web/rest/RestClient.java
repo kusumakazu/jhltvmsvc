@@ -3,7 +3,6 @@ package id.co.kusumakazu.web.rest;
 import id.co.kusumakazu.config.ApplicationProperties;
 import id.co.kusumakazu.domain.TargetTranslateContext;
 import id.co.kusumakazu.domain.staticconstant.Utils;
-import id.co.kusumakazu.service.TranslatorService;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.List;
