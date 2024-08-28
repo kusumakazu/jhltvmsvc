@@ -177,7 +177,10 @@ dependencies {
     testImplementation "org.testcontainers:junit-jupiter"
     testImplementation "org.testcontainers:testcontainers"
     // jhipster-needle-gradle-dependency - JHipster will add additional dependencies here
-    implementation 'com.google.code.gson:gson:2.8.8'
+    implementation 'com.google.code.gson:gson:2.10.1'
+    implementation 'com.ibm.icu:icu4j:72.1'
+    implementation 'org.springframework.boot:spring-boot-starter-webflux'
+
 //    implementation 'org.springframework.ai:spring-ai-openai' //-> unused
 
     implementation platform("org.springframework.ai:spring-ai-bom:1.0.0-SNAPSHOT") //-> core ai dependency
