@@ -8,7 +8,6 @@ import id.co.kusumakazu.domain.response.translator.DeepLXTranslatorResponse;
 import id.co.kusumakazu.service.TranslatorService;
 import id.co.kusumakazu.web.rest.RestClient;
 import java.util.List;
-import java.util.regex.Pattern;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +17,6 @@ import org.springframework.stereotype.Service;
 public class TranslatorServiceImpl implements TranslatorService {
 
     private final Logger log = LoggerFactory.getLogger(TranslatorServiceImpl.class);
-
-    private static final Pattern alphaReg = Pattern.compile("^[a-zA-Z]+$");
 
     @Autowired
     private RestClient restclient;
