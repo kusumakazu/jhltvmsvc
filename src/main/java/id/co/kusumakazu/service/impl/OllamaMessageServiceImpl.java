@@ -3,7 +3,6 @@ package id.co.kusumakazu.service.impl;
 import id.co.kusumakazu.domain.staticconstant.Utils;
 import id.co.kusumakazu.service.OllamaMessageService;
 import id.co.kusumakazu.service.VoiceVoxService;
-import id.co.kusumakazu.web.rest.CustomApiResource;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,7 +16,7 @@ import reactor.core.publisher.Mono;
 @Service
 public class OllamaMessageServiceImpl implements OllamaMessageService {
 
-    private final Logger log = LoggerFactory.getLogger(CustomApiResource.class);
+    private final Logger log = LoggerFactory.getLogger(OllamaMessageService.class);
 
     @Autowired
     private VoiceVoxService voiceVoxService;

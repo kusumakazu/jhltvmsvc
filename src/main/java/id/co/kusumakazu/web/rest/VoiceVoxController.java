@@ -14,7 +14,7 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/api")
 public class VoiceVoxController {
 
-    private final Logger log = LoggerFactory.getLogger(CustomApiResource.class);
+    private final Logger log = LoggerFactory.getLogger(VoiceVoxController.class);
 
     @Autowired
     private VoiceVoxService voiceVoxService;
