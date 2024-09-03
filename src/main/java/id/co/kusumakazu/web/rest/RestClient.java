@@ -35,7 +35,6 @@ public class RestClient {
         MappingJackson2HttpMessageConverter jsonConverter = new MappingJackson2HttpMessageConverter();
         jsonConverter.setDefaultCharset(StandardCharsets.UTF_8);
         restTemplate.getMessageConverters().add(jsonConverter);
-
         return restTemplate;
     }
 
@@ -153,7 +152,7 @@ public class RestClient {
             HttpEntity<Map<String, Object>> requestEntity = new HttpEntity<>(body, headers);
 
             ResponseEntity<String> response = getRestTemplate().exchange(deepLXUrl, HttpMethod.POST, requestEntity, String.class);
-            log.info("response : {}", response);
+            log.info("response status code: {}", response.getStatusCode());
             return response;
         } catch (RestClientResponseException e) {
             log.error("Error sendTranslate : {}", e.getMessage());

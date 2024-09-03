@@ -1,0 +1,17 @@
+version: '3.9'
+
+services:
+  voicevox:
+    image: voicevox/voicevox_engine:nvidia-ubuntu20.04-latest
+    # image: voicevox/voicevox_engine:cpu-ubuntu20.04-latest
+    # image: voicevox/voicevox_engine:nvidia-latest
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: [gpu]
+    ports:
+      - '50021:50021' # Expose port 50021 on all network interfaces
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=compute,utility

@@ -1,0 +1,15 @@
+version: '3.9'
+
+services:
+  deeplx:
+    image: ghcr.io/owo-network/deeplx:latest
+    container_name: deeplx
+    restart: unless-stopped
+    environment:
+      - DEBUG=true # Set to true for debugging output
+      - PORT=1188 # The port deeplx will listen on
+      - NODE_TLS_REJECT_UNAUTHORIZED=0 # Ignore self-signed SSL certs (if any)
+    ports:
+      - '1188:1188' # Map the container port to the host
+    volumes:
+      - ./config:/app/config # Optional: Mount a configuration directory

@@ -37,7 +37,6 @@ public class VoiceVoxServiceImpl implements VoiceVoxService {
             restClient.sendGetSpeakers(),
             new TypeToken<List<SpeakersResponseItem>>() {}.getType()
         );
-
         return new SpeakersResponse(speakersResponses);
     }
 

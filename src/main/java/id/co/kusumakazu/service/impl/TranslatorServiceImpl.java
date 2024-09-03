@@ -2,11 +2,15 @@ package id.co.kusumakazu.service.impl;
 
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
-import com.ibm.icu.text.Transliterator;
 import id.co.kusumakazu.domain.TargetTranslateContext;
 import id.co.kusumakazu.domain.response.translator.DeepLXTranslatorResponse;
 import id.co.kusumakazu.service.TranslatorService;
 import id.co.kusumakazu.web.rest.RestClient;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,23 +26,14 @@ public class TranslatorServiceImpl implements TranslatorService {
     private RestClient restclient;
 
     @Override
-    public String convert(String text) {
-        log.info("converting text : {}", text);
-        Transliterator latinToKatakana = Transliterator.getInstance("Latin-Katakana");
-        String converted = latinToKatakana.transliterate(text);
-        log.info("converted text : {}", converted);
-        return converted;
-    }
-
-    @Override
-    public DeepLXTranslatorResponse translate(List<String> texts, TargetTranslateContext contextLang) throws Exception {
-        log.info("translate Text : {}, target lang -> {}", texts, contextLang);
+    public DeepLXTranslatorResponse translate(List<String> texts, TargetTranslateContext targetLang) throws Exception {
+        log.info("translate Text : {}, target lang -> {}", texts, targetLang);
         Gson gson = new Gson();
         DeepLXTranslatorResponse resultResponse = gson.fromJson(
-            restclient.sendTranslate(texts, contextLang).getBody(),
+            restclient.sendTranslate(texts, targetLang).getBody(),
             new TypeToken<DeepLXTranslatorResponse>() {}.getType()
         );
-        log.info("resultResponse : {}", resultResponse);
+        log.info("Translate completed !");
         return resultResponse;
     }
 }

@@ -58,7 +58,7 @@ spring:
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     #    url: jdbc:postgresql://192.168.100.167:5433/jhltvmsvc
-    url: jdbc:postgresql://172.16.0.11:5433/jhltvmsvc
+    url: jdbc:postgresql://172.16.0.10:5433/jhltvmsvc
     username: nodedev1
     password: P3Xzc3er04
     hikari:
@@ -86,7 +86,7 @@ jhipster:
     redis: # Redis configuration
       expiration: 3600 # By default objects stay 1 hour (in seconds) in the cache
       #      server: redis://192.168.100.167:6379 #
-      server: redis://172.16.0.11:6379
+      server: redis://172.16.0.10:6379
       cluster: false
       # server: redis://localhost:6379,redis://localhost:16379,redis://localhost:26379
       # cluster: true

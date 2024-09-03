@@ -178,15 +178,14 @@ dependencies {
     testImplementation "org.testcontainers:testcontainers"
     // jhipster-needle-gradle-dependency - JHipster will add additional dependencies here
     implementation 'com.google.code.gson:gson:2.10.1'
-    implementation 'com.ibm.icu:icu4j:72.1'
     implementation 'org.springframework.boot:spring-boot-starter-webflux'
-
-//    implementation 'org.springframework.ai:spring-ai-openai' //-> unused
 
     implementation platform("org.springframework.ai:spring-ai-bom:1.0.0-SNAPSHOT") //-> core ai dependency
 //    implementation 'org.springframework.ai:spring-ai-openai-spring-boot-starter' //-> openai dependency
 //    implementation 'org.springframework.ai:spring-ai-huggingface-spring-boot-starter'
-    implementation 'org.springframework.ai:spring-ai-huggingface'
+//    implementation 'org.springframework.ai:spring-ai-openai' //-> unused
+//    implementation 'org.springframework.ai:spring-ai-huggingface'
+    implementation 'org.springframework.ai:spring-ai-ollama'
 }
 
 task cleanResources(type: Delete) {

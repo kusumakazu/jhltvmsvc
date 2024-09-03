@@ -33,11 +33,4 @@ public class VoiceVoxController {
     public Mono<ResponseEntity<byte[]>> synthesize2(@RequestParam String text, @RequestParam Integer speaker) throws Exception {
         return voiceVoxService.audioQueryAndSynthesize(text, speaker);
     }
-
-    @PostMapping("/voice-vox/test-katakana")
-    public ResponseEntity<String> getSpeakers(@RequestParam String text) {
-        log.debug("REST request to get test");
-
-        return ResponseEntity.ok(translatorService.convert(text));
-    }
 }

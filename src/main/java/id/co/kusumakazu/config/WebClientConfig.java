@@ -16,7 +16,7 @@ public class WebClientConfig {
 
     @Bean
     public WebClient webClient(WebClient.Builder builder) {
-        int bufferSize = 32 * 1024 * 1024;
+        int bufferSize = 128 * 1024 * 1024;
 
         ExchangeStrategies strategies = ExchangeStrategies.builder()
             .codecs(configurer -> configurer.defaultCodecs().maxInMemorySize(bufferSize))

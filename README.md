@@ -4,13 +4,13 @@ This application was generated using JHipster 8.6.0 for one purpose, prototyping
 
 features :
 
-TTS :
+    1. Voice vox TTS -> implemented
 
-    Voice vox TTS -> on going
+    2. Silero TTS -> TBD
 
-    Silero TTS -> to be develop
+    3. DeepLX Translator -> implemented
 
-    Huggingface AI Models -> to be develop
+    4. Huggingface AI Models -> TBD
 
 this app runs on port : 6550
 
