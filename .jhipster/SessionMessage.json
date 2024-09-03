@@ -1,0 +1,28 @@
+{
+  "annotations": {
+    "changelogDate": "20240903160857"
+  },
+  "applications": "*",
+  "clientRootFolder": "jhltvmsvc",
+  "databaseType": "sql",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "role",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "content",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "aiSessionId",
+      "fieldType": "Long"
+    }
+  ],
+  "microserviceName": "jhltvmsvc",
+  "name": "SessionMessage",
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}
