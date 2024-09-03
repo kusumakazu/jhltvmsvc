@@ -1,0 +1,13 @@
+entity AiSession {
+    sessionName String
+    sessionCreatedTime Instant
+}
+
+entity SessionMessage {
+    role String
+    content String
+    aiSessionId Long
+}
+dto * with mapstruct
+service * with serviceClass
+service * with serviceImpl
