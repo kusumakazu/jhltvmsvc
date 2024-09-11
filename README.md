@@ -19,4 +19,4 @@ Cache provider : `redis`
 > [!IMPORTANT]
 > make sure you download and run jhipster [registry](https://github.com/jhipster/jhipster-registry) before run the app for service discovery
 
-[^1]: inspired by @ardha27
+`inspired by @ardha27`
