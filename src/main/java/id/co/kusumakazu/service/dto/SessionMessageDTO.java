@@ -17,6 +17,13 @@ public class SessionMessageDTO implements Serializable {
 
     private Long aiSessionId;
 
+    public SessionMessageDTO(Long id, String role, String content, Long aiSessionId) {
+        this.id = id;
+        this.role = role;
+        this.content = content;
+        this.aiSessionId = aiSessionId;
+    }
+
     public Long getId() {
         return id;
     }

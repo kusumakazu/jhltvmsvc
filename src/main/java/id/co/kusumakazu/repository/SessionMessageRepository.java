@@ -1,6 +1,7 @@
 package id.co.kusumakazu.repository;
 
 import id.co.kusumakazu.domain.SessionMessage;
+import java.util.List;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;
 
@@ -9,4 +10,6 @@ import org.springframework.stereotype.Repository;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface SessionMessageRepository extends JpaRepository<SessionMessage, Long> {}
+public interface SessionMessageRepository extends JpaRepository<SessionMessage, Long> {
+    List<SessionMessage> findAllByAiSessionId(Long id);
+}

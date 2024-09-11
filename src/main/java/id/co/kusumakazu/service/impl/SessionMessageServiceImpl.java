@@ -86,4 +86,14 @@ public class SessionMessageServiceImpl implements SessionMessageService {
         log.debug("Request to delete SessionMessage : {}", id);
         sessionMessageRepository.deleteById(id);
     }
+
+    @Override
+    public List<SessionMessageDTO> findAllByAiSessionId(Long id) {
+        log.debug("Request to get all SessionMessages by id : {}", id);
+        return sessionMessageRepository
+            .findAllByAiSessionId(id)
+            .stream()
+            .map(sessionMessageMapper::toDto)
+            .collect(Collectors.toCollection(LinkedList::new));
+    }
 }

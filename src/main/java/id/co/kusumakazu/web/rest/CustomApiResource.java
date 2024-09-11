@@ -31,21 +31,13 @@ public class CustomApiResource {
     @Autowired
     private VoiceVoxService voiceVoxService;
 
-    //    @Autowired
-    //    private ChatClient chatClient;
-
-    //    @Autowired
-    //    public CustomApiResource(ChatClient.Builder builder) {
-    //        this.chatClient = builder.build();
-    //    }
-
     @Autowired
     private ChatConfig chatConfig;
 
     @Autowired
     private OllamaMessageService ollamaMessageService;
 
-    @GetMapping("/test/prompt")
+    //    @GetMapping("/test/prompt")
     public ResponseEntity<String> prompt(@RequestParam String message) {
         log.debug("REST request to get test prompt : {}", message);
 
@@ -83,17 +75,24 @@ public class CustomApiResource {
         log.info("request : {}", request.messages().get(1));
 
         OllamaApi.ChatResponse response = ollamaApi.chat(request);
-
         log.info("Response : {}", response);
         return ResponseEntity.ok(response.message().content());
     }
 
     @GetMapping("/freaky-ai/chat")
-    public Mono<ResponseEntity<byte[]>> freakyChatting(@RequestParam String text, @RequestParam JPVoice speaker) throws Exception {
+    public Mono<ResponseEntity<byte[]>> freakyChatting(
+        @RequestParam String text,
+        @RequestParam JPVoice speaker,
+        @RequestParam Long sessionId
+    ) throws Exception {
         log.debug("REST request to freaky Chatting with ai : {}", text);
         long start = System.currentTimeMillis();
 
-        Mono<ResponseEntity<byte[]>> response = ollamaMessageService.sendFreakyAIMessageWithSynthesize(text, speaker.getVoiceId());
+        Mono<ResponseEntity<byte[]>> response = ollamaMessageService.sendFreakyAIMessageWithSynthesize(
+            text,
+            speaker.getVoiceId(),
+            sessionId
+        );
 
         log.info("total time to process : " + (System.currentTimeMillis() - start) + " in ms");
         return response;

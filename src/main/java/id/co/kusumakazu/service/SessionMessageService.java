@@ -53,4 +53,5 @@ public interface SessionMessageService {
      * @param id the id of the entity.
      */
     void delete(Long id);
+    List<SessionMessageDTO> findAllByAiSessionId(Long id);
 }

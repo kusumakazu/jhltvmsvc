@@ -2,16 +2,21 @@
 
 This application was generated using JHipster 8.6.0 for one purpose, prototyping AI Speaking chat bot!
 
-features :
+### features :
 
-    1. Voice vox TTS -> implemented
+- Voice vox TTS
 
-    2. Silero TTS -> TBD
+- DeepLX Translator
 
-    3. DeepLX Translator -> implemented
+- Ollama AI Model (**hermes3**), or you can choose available model
 
-    4. Huggingface AI Models -> TBD
+this app runs on port : `6550`
 
-this app runs on port : 6550
+Database : `postgresql`
 
-inspired by @ardha27
+Cache provider : `redis`
+
+> [!IMPORTANT]
+> make sure you download and run jhipster [registry](https://github.com/jhipster/jhipster-registry) before run the app for service discovery
+
+[^1]: inspired by @ardha27

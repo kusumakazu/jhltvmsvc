@@ -46,6 +46,7 @@ public class AiSessionResource {
      * @param aiSessionDTO the aiSessionDTO to create.
      * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new aiSessionDTO, or with status {@code 400 (Bad Request)} if the aiSession has already an ID.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
+     * you need AiSession.Id for start conversation
      */
     @PostMapping("")
     public ResponseEntity<AiSessionDTO> createAiSession(@RequestBody AiSessionDTO aiSessionDTO) throws URISyntaxException {
